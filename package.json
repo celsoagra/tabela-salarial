@@ -6,10 +6,12 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod" : "ng build --prod --output-path=docs",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy" : "gh-pages -d build"
+    "predeploy" : "ng build --prod --base-href https://celsoagra.github.io/tabela-salarial/",
+    "deploy" : "gh-pages --dir=dist/tabela-salarial"
   },
   "private": true,
   "dependencies": {
