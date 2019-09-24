@@ -1,12 +1,11 @@
 {
   "name": "tabela-salarial",
   "version": "0.0.0",
-  "homepage": "https://celsoagra.github.io/tabela-salarial/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:prod": "ng build --prod --base-href /tabela-salarial --output-path=docs",
+    "build:prod": "ng build --prod --output-path=docs",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
