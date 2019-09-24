@@ -99,7 +99,7 @@
       <tbody>
         <tr *ngFor="let matriz of classes">
           <ng-container *ngFor="let faixas of matriz">
-              <td> {{ faixas }} </td>
+              <td style="text-align: right;" > {{ faixas | currency }} </td>
               <!-- <td> <input style="width:4rem;" class="input" type="number" value="0" > </td> -->
           </ng-container>
         </tr>
