@@ -46,19 +46,17 @@ export class AppComponent implements OnInit {
               } else {
                 var temp = this.tabela[c-1][this.matriz-1][this.faixas-1];
 
-                this.tabela[c][m][f] = temp * ( 1 + (this.intersticioClasses/100));
-                this.tabela[c][m][f] = parseFloat( this.tabela[c][m][f].toFixed(2) );  
+                this.tabela[c][m][f] = this.getValue( temp * ( 1 + (this.intersticioClasses/100)) );
               }
 
             } else {
-              this.tabela[c][m][f] = this.tabela[c][m-1][0] + (this.tabela[c][m-1][0] * (this.intersticioMatrixes/100) );
-              this.tabela[c][m][f] = parseFloat( this.tabela[c][m][f].toFixed(2) );
+              this.tabela[c][m][f] = this.getValue( this.tabela[c][m-1][0] + (this.tabela[c][m-1][0] * (this.intersticioMatrixes/100) ) );
             }
 
             
           } else {
             var numberTemp : number = this.tabela[c][m][f-1] + (this.tabela[c][m][f-1] * (this.intersticio/100) );
-            this.tabela[c][m][f] =  parseFloat( numberTemp.toFixed(2) );
+            this.tabela[c][m][f] = this.getValue(numberTemp);
           }
 
           
@@ -71,6 +69,10 @@ export class AppComponent implements OnInit {
     } // classes
 
     return this.tabela;
+  }
+
+  getValue(val : number) {
+    return parseFloat( val.toFixed(2) )
   }
 
   ngOnInit() {
