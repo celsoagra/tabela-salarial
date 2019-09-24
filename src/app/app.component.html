@@ -1,21 +1,102 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Tabela Salarial
+      </h1>
+    </div>
+  </div>
+</section>
+
+<div class="columns body-columns">
+  <div class="column is-half is-offset-one-quarter">
+
+      <div class="columns">
+        <div class="column is-three-quarters">
+            <div class="field">
+              <label class="label">Salário Base</label>
+              <div class="control">
+                <input class="input" type="text" [(ngModel)]="salarioBase">
+              </div>
+            </div>
+        </div>
+        <div class="column is-one-quarter">
+            <div class="field is-grouped ">
+              <div class="control">
+                <button type="button" (click)="getTabelaSalarial()" class="button is-link is-large">Atualizar</button>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="column">
+            <div class="field">
+              <label class="label">Quantidade de Classes</label>
+              <div class="control">
+                <input class="input" type="text" [(ngModel)]="classes">
+              </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="field">
+              <label class="label">Quantidade de Matrizes</label>
+              <div class="control">
+                <input class="input" type="text" [(ngModel)]="matriz">
+              </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="field">
+              <label class="label">Quantidade entre Faixas</label>
+              <div class="control">
+                <input class="input" type="text" [(ngModel)]="faixas">
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="column">
+            <div class="field">
+              <label class="label">intersticio entre classes (%)</label>
+              <div class="control">
+                <input class="input" type="text" [(ngModel)]="intersticioClasses">
+              </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="field">
+              <label class="label">intersticio entre Matrizes (%)</label>
+              <div class="control">
+                <input class="input" type="text" [(ngModel)]="intersticioMatrixes">
+              </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="field">
+              <label class="label">intersticio entre faixas (%)</label>
+              <div class="control">
+                <input class="input" type="text" [(ngModel)]="intersticio">
+              </div>
+            </div>
+        </div>
+      </div>
+
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+
+<div class="columns body-columns">
+  <div class="column is-half is-offset-one-quarter">
+    <table *ngFor="let classes of tabela" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" style="padding-bottom: 10rem">
+      <tbody>
+        <tr *ngFor="let matriz of classes">
+          <td *ngFor="let faixas of matriz" > {{ faixas }} </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
 
 <router-outlet></router-outlet>
