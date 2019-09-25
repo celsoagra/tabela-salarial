@@ -15,7 +15,7 @@
               <div class="field">
                 <label class="label">Salário Base</label>
                 <div class="control">
-                  <input class="input" type="number" min="0" [(ngModel)]="salarioBase">
+                  <input class="input" type="number" min="0" onkeydown="if(event.key===','){event.preventDefault();}" [(ngModel)]="salarioBase">
                 </div>
               </div>
           </div>
@@ -33,7 +33,7 @@
               <div class="field">
                 <label class="label">Qtde de Classes</label>
                 <div class="control">
-                  <input class="input" type="number" min="0" [(ngModel)]="classes">
+                  <input class="input" type="number" onkeydown="if(event.key===','){event.preventDefault();}" min="0" [(ngModel)]="classes">
                 </div>
               </div>
           </div>
@@ -41,7 +41,7 @@
               <div class="field">
                 <label class="label">Qtde de Matrizes</label>
                 <div class="control">
-                  <input class="input" type="number" min="0" [(ngModel)]="matriz">
+                  <input class="input" type="number" onkeydown="if(event.key===','){event.preventDefault();}" min="0" [(ngModel)]="matriz">
                 </div>
               </div>
           </div>
@@ -49,7 +49,7 @@
               <div class="field">
                 <label class="label">Qtde entre Faixas</label>
                 <div class="control">
-                  <input class="input" type="number" min="0" [(ngModel)]="faixas">
+                  <input class="input" type="number" onkeydown="if(event.key===','){event.preventDefault();}" min="0" [(ngModel)]="faixas">
                 </div>
               </div>
           </div>
@@ -68,7 +68,7 @@
               <div class="field">
                 <label class="label">intersticio entre classes (%)</label>
                 <div class="control">
-                  <input class="input" type="number" min="0" [(ngModel)]="intersticioClasses">
+                  <input class="input" type="number" onkeydown="if(event.key===','){event.preventDefault();}" min="0" [(ngModel)]="intersticioClasses">
                 </div>
               </div>
           </div>
@@ -76,7 +76,7 @@
               <div class="field">
                 <label class="label">intersticio entre Matrizes (%)</label>
                 <div class="control">
-                  <input class="input" type="number" min="0" [(ngModel)]="intersticioMatrixes">
+                  <input class="input" type="number" onkeydown="if(event.key===','){event.preventDefault();}" min="0" [(ngModel)]="intersticioMatrixes">
                 </div>
               </div>
           </div>
@@ -84,7 +84,7 @@
               <div class="field">
                 <label class="label">intersticio entre faixas (%)</label>
                 <div class="control">
-                  <input class="input" type="number" min="0" [(ngModel)]="intersticio">
+                  <input class="input" type="number" onkeydown="if(event.key===','){event.preventDefault();}" min="0" [(ngModel)]="intersticio">
                 </div>
               </div>
           </div>
@@ -96,22 +96,37 @@
 <div class="columns body-columns">
   <div class="column is-half is-offset-one-quarter">
     <div class="box">
-      <p class="is-size-4"><span class="has-text-weight-bold">Impacto: </span>947372498</p>
+      <p class="is-size-4"><span class="has-text-weight-bold">Impacto: </span> {{ countImpact() | currency }}</p>
     </div>
   </div>
 </div>
 <div class="columns body-columns">
   <div class="column is-10 is-offset-1">
-    <table *ngFor="let classes of tabela" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" style="padding-bottom: 10rem">
-      <tbody>
-        <tr *ngFor="let matriz of classes">
-          <ng-container *ngFor="let faixas of matriz">
-              <td style="text-align: right;" > {{ faixas | currency }} </td>
-              <td> <input style="width:4rem;" class="input" type="number" value="0" > </td>
-          </ng-container>
-        </tr>
-      </tbody>
-    </table>
+    <ng-container *ngFor="let classes of tabela; let classesIndex = index">
+      <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" style="padding-bottom: 10rem">
+        <thead>
+          <tr class="is-selected" >
+            <th style="text-align: center;" [attr.colspan]="(faixasTableNumber * 2) + 1">Classe {{ classesIndex + 1 }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let matriz of classes; let matrizIndex = index">
+            <ng-container *ngFor="let faixas of matriz; let faixasIndex = index">
+                <td class="has-text-weight-bold is-selected" *ngIf="faixasIndex == 0" >{{ listMatricesNumeral[matrizIndex] }}</td>
+                <td style="text-align: right;" > {{ faixas | currency }} </td>
+                <td><input style="width:4rem;" [(ngModel)]="tabelaQtde[classesIndex][matrizIndex][faixasIndex]" oninput="this.value=(parseInt(this.value)||0)" class="input" type="number" min="0" > </td>
+            </ng-container>
+          </tr>
+          <tr class="is-selected" >
+              <ng-container *ngFor="let element of getArrayLetters(faixasTableNumber); let elementIndex = index">
+                <td *ngIf="elementIndex == 0" > # </td>
+                <td class="has-text-weight-bold" style="text-align: center;" > {{ element }} </td>
+                <td class="has-text-weight-bold" style="text-align: center;" > qtde </td>
+              </ng-container>  
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
 
   </div>
 </div>

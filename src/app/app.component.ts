@@ -9,31 +9,52 @@ export class AppComponent implements OnInit {
   title = 'tabela-salarial';
 
   salarioBase : number = 5618;
-  classes : number = 4;
   intersticio : number = 1.7;
   intersticioClasses : number = 5;
   intersticioMatrixes : number = 5;
+  classes : number = 4;
   faixas : number = 7;
   matriz : number = 4;
+
+  classesTableNumber : number = 0;
+  faixasTableNumber : number = 0;
+  matrizTableNumber : number = 0;
+
   tabela : number[][][] = [];
+  tabelaQtde : number[][][] = [];
+  listMatricesNumeral : number[] = [];
 
   getTabelaSalarial() {
     this.salarioBase = parseFloat(this.salarioBase + "");
-    this.salarioBase = parseFloat(this.salarioBase + "");
-    this.classes = parseFloat(this.classes + "");
     this.intersticio = parseFloat(this.intersticio + "");
     this.intersticioClasses = parseFloat(this.intersticioClasses + "");
     this.intersticioMatrixes = parseFloat(this.intersticioMatrixes + "");
+    this.classes = parseFloat(this.classes + "");
     this.faixas = parseFloat(this.faixas + "");
     this.matriz = parseFloat(this.matriz + "");
 
-    if (this.tabela) this.tabela = [];
+    this.classesTableNumber = this.classes;
+    this.faixasTableNumber = this.faixas;
+    this.matrizTableNumber = this.matriz;
+
+    this.listMatricesNumeral = this.getArrayNumeralsReverse(this.matrizTableNumber);
+    
+    if (this.tabela) {
+      this.tabela = [];
+      this.tabelaQtde = [];
+    }
 
     for (var c = 0; c < this.classes ; c++) { // classes
-      if(!this.tabela[c]) { this.tabela[c] = []; }
+      if(!this.tabela[c]) { 
+        this.tabela[c] = [];
+        this.tabelaQtde[c] = []; 
+      }
 
       for (var m = 0; m < this.matriz ; m++) { // matriz
-        if (!this.tabela[c][m]) { this.tabela[c][m] = [] };
+        if (!this.tabela[c][m]) {
+          this.tabela[c][m] = [];
+          this.tabelaQtde[c][m] = [];
+        };
 
         for (var f = 0; f < this.faixas ; f++) { // faixas
 
@@ -59,6 +80,9 @@ export class AppComponent implements OnInit {
             this.tabela[c][m][f] = this.getValue(numberTemp);
           }
 
+          // incluindo quantidade
+          this.tabelaQtde[c][m][f] = 0;
+
           
         } // faixas
                 
@@ -68,12 +92,39 @@ export class AppComponent implements OnInit {
 
     } // classes
 
+    this.countImpact();
+
     return this.tabela;
+  }
+
+  countImpact() {
+    var impact : number = 0;
+
+    if (this.tabela && this.tabelaQtde) {
+      for (var c = 0; c < this.classesTableNumber ; c++) { // classes
+        for (var m = 0; m < this.matrizTableNumber ; m++) { // matriz  
+          for (var f = 0; f < this.faixasTableNumber ; f++) { // faixas
+            impact += this.tabelaQtde[c][m][f] * this.tabela[c][m][f];
+          } // faixas
+        } // matriz  
+      } // classes
+    }
+    
+    return impact;
   }
 
   getValue(val : number) {
     return parseFloat( val.toFixed(2) )
   }
+
+  getArrayLetters(n: number): any[] {
+    return Array.from(Array(n), (e, i) => String.fromCharCode(i + 97));
+  }
+
+  getArrayNumeralsReverse(n: number): any[] {
+    return Array.from({ length: n }, (v, i) => i+1).reverse();
+  }
+  
 
   ngOnInit() {
     this.getTabelaSalarial();
