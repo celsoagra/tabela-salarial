@@ -7,100 +7,107 @@
     </div>
   </div>
 </section>
+  <div class="columns body-columns">
+    <div class="column is-half is-offset-one-quarter">
+      <div class="box">
+        <div class="columns">
+          <div class="column is-three-quarters">
+              <div class="field">
+                <label class="label">Salário Base</label>
+                <div class="control">
+                  <input class="input" type="number" min="0" [(ngModel)]="salarioBase">
+                </div>
+              </div>
+          </div>
+          <div class="column is-one-quarter">
+              <div class="field is-grouped ">
+                <div class="control">
+                  <button type="button" (click)="getTabelaSalarial()" class="button is-link is-large">Atualizar</button>
+                </div>
+              </div>
+          </div>
+        </div>
 
-<div class="columns body-columns">
-  <div class="column is-half is-offset-one-quarter">
+        <div class="columns">
+          <div class="column">
+              <div class="field">
+                <label class="label">Qtde de Classes</label>
+                <div class="control">
+                  <input class="input" type="number" min="0" [(ngModel)]="classes">
+                </div>
+              </div>
+          </div>
+          <div class="column">
+              <div class="field">
+                <label class="label">Qtde de Matrizes</label>
+                <div class="control">
+                  <input class="input" type="number" min="0" [(ngModel)]="matriz">
+                </div>
+              </div>
+          </div>
+          <div class="column">
+              <div class="field">
+                <label class="label">Qtde entre Faixas</label>
+                <div class="control">
+                  <input class="input" type="number" min="0" [(ngModel)]="faixas">
+                </div>
+              </div>
+          </div>
+          <div class="column">
+              <div class="field">
+                <label class="label">Total de Faixas</label>
+                <div class="control">
+                    <input class="input is-static" type="number" min="0" value="{{classes * faixas}}" readonly>
+                </div>
+              </div>
+          </div>
+        </div>
 
-      <div class="columns">
-        <div class="column is-three-quarters">
-            <div class="field">
-              <label class="label">Salário Base</label>
-              <div class="control">
-                <input class="input" type="number" min="0" [(ngModel)]="salarioBase">
+        <div class="columns">
+          <div class="column">
+              <div class="field">
+                <label class="label">intersticio entre classes (%)</label>
+                <div class="control">
+                  <input class="input" type="number" min="0" [(ngModel)]="intersticioClasses">
+                </div>
               </div>
-            </div>
-        </div>
-        <div class="column is-one-quarter">
-            <div class="field is-grouped ">
-              <div class="control">
-                <button type="button" (click)="getTabelaSalarial()" class="button is-link is-large">Atualizar</button>
+          </div>
+          <div class="column">
+              <div class="field">
+                <label class="label">intersticio entre Matrizes (%)</label>
+                <div class="control">
+                  <input class="input" type="number" min="0" [(ngModel)]="intersticioMatrixes">
+                </div>
               </div>
-            </div>
+          </div>
+          <div class="column">
+              <div class="field">
+                <label class="label">intersticio entre faixas (%)</label>
+                <div class="control">
+                  <input class="input" type="number" min="0" [(ngModel)]="intersticio">
+                </div>
+              </div>
+          </div>
         </div>
-      </div>
 
-      <div class="columns">
-        <div class="column">
-            <div class="field">
-              <label class="label">Qtde de Classes</label>
-              <div class="control">
-                <input class="input" type="number" min="0" [(ngModel)]="classes">
-              </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="field">
-              <label class="label">Qtde de Matrizes</label>
-              <div class="control">
-                <input class="input" type="number" min="0" [(ngModel)]="matriz">
-              </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="field">
-              <label class="label">Qtde entre Faixas</label>
-              <div class="control">
-                <input class="input" type="number" min="0" [(ngModel)]="faixas">
-              </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="field">
-              <label class="label">Total de Faixas</label>
-              <div class="control">
-                  <input class="input is-static" type="number" min="0" value="{{classes * faixas}}" readonly>
-              </div>
-            </div>
-        </div>
-      </div>
-
-      <div class="columns">
-        <div class="column">
-            <div class="field">
-              <label class="label">intersticio entre classes (%)</label>
-              <div class="control">
-                <input class="input" type="number" min="0" [(ngModel)]="intersticioClasses">
-              </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="field">
-              <label class="label">intersticio entre Matrizes (%)</label>
-              <div class="control">
-                <input class="input" type="number" min="0" [(ngModel)]="intersticioMatrixes">
-              </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="field">
-              <label class="label">intersticio entre faixas (%)</label>
-              <div class="control">
-                <input class="input" type="number" min="0" [(ngModel)]="intersticio">
-              </div>
-            </div>
-        </div>
-      </div>
-
+    </div>
   </div>
 </div>
 <div class="columns body-columns">
   <div class="column is-half is-offset-one-quarter">
+    <div class="box">
+      <p class="is-size-4"><span class="has-text-weight-bold">Impacto: </span>947372498</p>
+    </div>
+  </div>
+</div>
+<div class="columns body-columns">
+  <div class="column is-10 is-offset-1">
     <table *ngFor="let classes of tabela" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" style="padding-bottom: 10rem">
       <tbody>
         <tr *ngFor="let matriz of classes">
           <ng-container *ngFor="let faixas of matriz">
               <td style="text-align: right;" > {{ faixas | currency }} </td>
-              <!-- <td> <input style="width:4rem;" class="input" type="number" value="0" > </td> -->
+              <td> <input style="width:4rem;" class="input" type="number" value="0" > </td>
           </ng-container>
         </tr>
       </tbody>
