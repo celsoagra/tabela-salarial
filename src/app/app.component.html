@@ -96,7 +96,7 @@
 <div class="columns body-columns">
   <div class="column is-half is-offset-one-quarter">
     <div class="box">
-      <p class="is-size-4"><span class="has-text-weight-bold">Impacto: </span> {{ countImpact() | currency }}</p>
+      <p class="is-size-4"><span class="has-text-weight-bold">Impacto: </span> {{ getFormattedPrice(countImpact()) }}</p>
     </div>
   </div>
 </div>
@@ -113,7 +113,7 @@
           <tr *ngFor="let matriz of classes; let matrizIndex = index">
             <ng-container *ngFor="let faixas of matriz; let faixasIndex = index">
                 <td class="has-text-weight-bold is-selected" *ngIf="faixasIndex == 0" >{{ listMatricesNumeral[matrizIndex] }}</td>
-                <td style="text-align: right;" > {{ faixas | currency }} </td>
+                <td style="text-align: right;" > {{ getFormattedPrice(faixas) }} </td>
                 <td><input style="width:4rem;" [(ngModel)]="tabelaQtde[classesIndex][matrizIndex][faixasIndex]" oninput="this.value=(parseInt(this.value)||0)" class="input" type="number" min="0" > </td>
             </ng-container>
           </tr>
