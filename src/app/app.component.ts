@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-root',
@@ -158,14 +159,47 @@ export class AppComponent implements OnInit {
     popupWin.document.write(`
       <html>
         <head>
-          <title>Print tab</title>
+          <title>Tabela Salarial</title>
           <style>
+          table > th, td {
+            border: 1px solid black;
+          }
+          table {
+            width: 100%;
+            padding-bottom: 0.75rem;
+          }
           </style>
         </head>
-    <body onload="window.print();window.close()">${printContents}</body>
+        <body onload="window.print();">
+          <p><strong>Impacto Financeiro</strong> ${this.getFormattedPrice(this.countImpact())} | <strong>Quantidade de Colaboradores</strong> ${this.countQtde()}</p>
+          <p><strong>Salário Base: </strong> ${this.getFormattedPrice(this.salarioBase)} <br/> 
+          <strong>Informações: </strong> Matriz de ${this.matriz}, contendo ${this.faixas} faixas e ${this.classes} classes (total de ${this.faixas * this.classes} faixas) <br/> 
+          <strong>intersticios: </strong> ${this.intersticio}% entre faixas ; ${this.intersticioClasses}% entre classes ; ${this.intersticioMatrixes}% entre Matrizes</p>
+          ${printContents}
+        </body>
       </html>`
     );
     popupWin.document.close();
-}
+  }
+
+  downloadData(data : any) {
+    var BOM = "\uFEFF";
+    var csvData = BOM;
+    
+    if (this.tabela && this.tabelaQtde) {
+      for (var c = 0; c < this.classesTableNumber ; c++) { // classes
+        for (var m = 0; m < this.matrizTableNumber ; m++) { // matriz  
+          for (var f = 0; f < this.faixasTableNumber ; f++) { // faixas
+            csvData += this.tabela[c][m][f] + ";"
+          } // faixas
+          csvData += "\n"
+        } // matriz
+        csvData += "\n\n"
+      } // classes
+    }
+
+    var blob = new Blob([csvData], { type: "text/csv;charset=utf-8" });
+    saveAs(blob, "tabela_salarial.csv");
+  }
 
 }

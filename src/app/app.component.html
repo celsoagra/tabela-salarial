@@ -4,7 +4,7 @@
         <div class="navbar-menu">
           <div class="navbar-start"></div>
           <div class="navbar-brand">
-              <h1 class="title">Tabela Salarial</h1>  
+              <h1 class="title">Tabela Salarial <span class="tag is-warning is-medium">.BETA</span> </h1>  
           </div>
           <div class="navbar-end"></div>
         </div>
@@ -109,9 +109,9 @@
         </div>
         <div class="column is-3">
             <div class="buttons">
-                <button type="button" disabled (click)="print()" class="button is-link is-large"><i class="fas fa-print"></i></button>  
+                <button type="button" (click)="print()" class="button is-link is-large"><i class="fas fa-print"></i></button>  
                 <button type="button" disabled class="button is-link is-large"><i class="fas fa-file-pdf"></i></button>
-                <button type="button" disabled class="button is-link is-large"><i class="fas fa-file-csv"></i></button>
+                <button type="button" (click)="downloadData(tabela)" class="button is-link is-large"><i class="fas fa-file-csv"></i></button>
             </div>
         </div>
       </div>
@@ -119,10 +119,10 @@
     </div>
   </div>
 </div>
-<div class="box">
-    <div class="table-container" >
+<div class="box" >
+    <div class="table-container" id="printable-component" >
     <ng-container *ngFor="let classes of tabela; let classesIndex = index">
-      <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" style="padding-bottom: 10rem">
+      <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
         <thead>
           <tr class="is-selected" >
             <th style="text-align: center;" [attr.colspan]="(faixasTableNumber * 2) + 1">Classe {{ classesIndex + 1 }}</th>
