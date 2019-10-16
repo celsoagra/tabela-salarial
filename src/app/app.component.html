@@ -1,32 +1,36 @@
-<section class="hero">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
-        Tabela Salarial
-      </h1>
-    </div>
-  </div>
-</section>
-  <div class="columns body-columns">
-    <div class="column is-half is-offset-one-quarter">
-      <div class="box">
-        <div class="columns">
-          <div class="column is-three-quarters">
-              <div class="field">
-                <label class="label">Salário Base</label>
-                <div class="control">
-                  <input class="input" type="number" min="0" onkeydown="if(event.key===','){event.preventDefault();}" [(ngModel)]="salarioBase">
-                </div>
-              </div>
+<div class="container is-fluid" id="content">
+    <nav data-section-id="1" data-component-id="15a7_1_01_awz" data-category="navigations" class="navbar">
+      <div class="container">
+        <div class="navbar-menu">
+          <div class="navbar-start"></div>
+          <div class="navbar-brand">
+              <h1 class="title">Tabela Salarial</h1>  
           </div>
-          <div class="column is-one-quarter">
-              <div class="field is-grouped ">
-                <div class="control">
-                  <button type="button" (click)="getTabelaSalarial()" class="button is-link is-large">Atualizar</button>
-                </div>
-              </div>
+          <div class="navbar-end"></div>
+        </div>
+      </div>
+    </nav>
+</div>
+<div class="columns is-centered body-columns">
+  <div class="column is-half">
+    <div class="box">
+      <div class="columns">
+        <div class="column is-three-quarters">
+          <div class="field">
+            <label class="label">Salário Base</label>
+            <div class="control">
+              <input class="input" type="number" min="0" onkeydown="if(event.key===','){event.preventDefault();}" [(ngModel)]="salarioBase">
+            </div>
           </div>
         </div>
+        <div class="column is-one-quarter">
+            <div class="field is-grouped ">
+              <div class="control">
+                <button type="button" (click)="getTabelaSalarial()" class="button is-link is-large">Atualizar</button>
+              </div>
+            </div>
+        </div>
+      </div>
 
         <div class="columns">
           <div class="column">
@@ -93,15 +97,30 @@
     </div>
   </div>
 </div>
-<div class="columns body-columns">
-  <div class="column is-half is-offset-one-quarter">
+<div class="columns is-centered body-columns">
+  <div class="column is-half">
     <div class="box">
-      <p class="is-size-4"><span class="has-text-weight-bold">Impacto: </span> {{ getFormattedPrice(countImpact()) }}</p>
+      <div class="columns">
+        <div class="column is-6">
+          <p class="is-size-4"><span class="has-text-weight-bold">Impacto: </span> {{ getFormattedPrice(countImpact()) }}</p>
+        </div>
+        <div class="column is-3">
+          <p class="is-size-4"><span class="has-text-weight-bold">Total: </span> {{ countQtde() }}</p>
+        </div>
+        <div class="column is-3">
+            <div class="buttons">
+                <button type="button" disabled (click)="print()" class="button is-link is-large"><i class="fas fa-print"></i></button>  
+                <button type="button" disabled class="button is-link is-large"><i class="fas fa-file-pdf"></i></button>
+                <button type="button" disabled class="button is-link is-large"><i class="fas fa-file-csv"></i></button>
+            </div>
+        </div>
+      </div>
+      
     </div>
   </div>
 </div>
-<div class="columns body-columns">
-  <div class="column is-10 is-offset-1">
+<div class="box">
+    <div class="table-container" >
     <ng-container *ngFor="let classes of tabela; let classesIndex = index">
       <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" style="padding-bottom: 10rem">
         <thead>

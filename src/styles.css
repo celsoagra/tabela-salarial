@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+.table tr.is-selected {
+    background-color: #3273dc !important;
+}
+
+.table td.is-selected, .table th.is-selected {
+    background-color: #3273dc !important;
+}
+
+.is-overflow { overflow-x: auto; }

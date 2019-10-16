@@ -113,6 +113,22 @@ export class AppComponent implements OnInit {
     return impact;
   }
 
+  countQtde() {
+    var impact : number = 0;
+
+    if (this.tabela && this.tabelaQtde) {
+      for (var c = 0; c < this.classesTableNumber ; c++) { // classes
+        for (var m = 0; m < this.matrizTableNumber ; m++) { // matriz  
+          for (var f = 0; f < this.faixasTableNumber ; f++) { // faixas
+            impact += this.tabelaQtde[c][m][f];
+          } // faixas
+        } // matriz  
+      } // classes
+    }
+    
+    return impact;
+  }
+
   getValue(val : number) {
     return parseFloat( val.toFixed(2) )
   }
@@ -133,5 +149,23 @@ export class AppComponent implements OnInit {
   getFormattedPrice(price: number) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price);
   }
+
+  print(): void {
+    let printContents, popupWin;
+    printContents = document.getElementById('printable-component').innerHTML;
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <title>Print tab</title>
+          <style>
+          </style>
+        </head>
+    <body onload="window.print();window.close()">${printContents}</body>
+      </html>`
+    );
+    popupWin.document.close();
+}
 
 }
