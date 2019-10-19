@@ -9,6 +9,9 @@ import { saveAs } from 'file-saver';
 export class AppComponent implements OnInit {
   title = 'tabela-salarial';
 
+  /**
+   * Parametros iniciais
+   */
   salarioBase : number = 5618;
   intersticio : number = 1.7;
   intersticioClasses : number = 5;
@@ -25,6 +28,9 @@ export class AppComponent implements OnInit {
   tabelaQtde : number[][][] = [];
   listMatricesNumeral : number[] = [];
 
+  /**
+   * TODO O(n^3)
+   */
   getTabelaSalarial() {
     this.salarioBase = parseFloat(this.salarioBase + "");
     this.intersticio = parseFloat(this.intersticio + "");
@@ -98,6 +104,9 @@ export class AppComponent implements OnInit {
     return this.tabela;
   }
 
+  /**
+   * TODO O(n^3)
+   */
   countImpact() {
     var impact : number = 0;
 
@@ -114,6 +123,9 @@ export class AppComponent implements OnInit {
     return impact;
   }
 
+  /**
+   * TODO O(n^3)
+   */
   countQtde() {
     var impact : number = 0;
 
@@ -182,6 +194,9 @@ export class AppComponent implements OnInit {
     popupWin.document.close();
   }
 
+  /**
+   * TODO O(n^3)
+   */
   downloadData(data : any) {
     var BOM = "\uFEFF";
     var csvData = BOM;
